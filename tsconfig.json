@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2016",
+        "jsx": "react",
+        "strictFunctionTypes": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "baseUrl": "./",
+        "paths": {
+            "Store/*": ["src/store/*"],
+            "Store": ["src/store"],
+            "Util/*": ["src/util/*"]
+        }
+    },
+    "exclude": ["node_modules", "**/node_modules/*"],
+    "include": ["src/**/*", "assets/**/*"]
+}

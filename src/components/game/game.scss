@@ -1,0 +1,44 @@
+@font-face {
+    font-family: 'Overpass Mono SemiBold';
+    src: url('../../../assets/OverpassMono-SemiBold.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'Overpass Mono Light';
+    src: url('../../../assets/OverpassMono-Light.ttf') format('truetype')
+}
+
+#game {
+    min-width: 90%;
+    width: 60%;
+    min-height: 40%;
+
+    font-family: 'Overpass Mono SemiBold';
+    position: absolute;
+}
+
+.text-window #game {
+    position: absolute;
+
+    top: 0;
+    bottom: 50%;
+
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+
+    font-size: 24px;
+}
+
+#stats-display {
+    position: absolute;
+
+    top: 50%;
+    bottom: 0;
+
+    width: 100%;
+    text-align: center;
+
+    font-size: 24px;
+    font-family: 'Overpass Mono Light';
+}
