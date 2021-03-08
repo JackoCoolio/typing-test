@@ -3,15 +3,10 @@ import { connect } from 'react-redux'
 import { RootState } from 'Store/index'
 import { GameTextWindow } from './game-text-window'
 import './game.scss'
-import { updateUserInput, restartTest } from 'Store/game/actions'
-import { GameState } from 'Store/game/types'
 
 interface Props {}
 
-interface State {
-    timer: [number, number]
-    wpm: number
-}
+interface State {}
 
 export class Game extends Component<Props, State> {
     constructor(props: Props) {
@@ -27,10 +22,6 @@ export class Game extends Component<Props, State> {
         return (
             <div id="game">
                 <GameTextWindow />
-                <div id="stats-display">
-                    {this.state.wpm}
-                    <br />
-                </div>
             </div>
         )
     }

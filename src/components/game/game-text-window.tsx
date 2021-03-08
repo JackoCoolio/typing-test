@@ -2,7 +2,12 @@ import { remote } from 'electron'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { RootState } from 'Store'
-import { restartTest, startTest, updateUserInput } from 'Store/game/actions'
+import {
+    restartTest,
+    startTest,
+    updateUserInput,
+    finishTest,
+} from 'Store/game/actions'
 import { GameState } from 'Store/game/types'
 import { calculateWPM, getElapsedTime, isHotkeyPressed } from 'Util/util'
 import { TextWindow, TextWindowState } from '../textwindow/text-window'
@@ -18,6 +23,7 @@ interface GameTextWindowProps {
     updateUserInput: typeof updateUserInput
     restartTest: typeof restartTest
     startTest: typeof startTest
+    finishTest: typeof finishTest
 }
 
 const restartHotkey = ['Shift', 'Enter']
@@ -75,17 +81,21 @@ class GameTextWindowComponent extends TextWindow<
                     action = undefined
                 }
 
-                if (this.state.userInput.length === 0 && action.length === 1) {
-                    this.props.startTest()
-                }
-
                 // apply the action
                 if (action !== undefined) {
                     this.doAction(action)
                     this.props.updateUserInput(action)
                 }
 
+                if (
+                    this.state.userInput.length > 0 &&
+                    !this.props.game.inProgress
+                ) {
+                    this.props.startTest()
+                }
+
                 if (this.state.targetString === this.state.userInput) {
+                    this.props.finishTest()
                     this.restart()
                 }
             } else if (input.type === 'keyUp') {
@@ -123,5 +133,6 @@ export const GameTextWindow = connect(
         updateUserInput,
         restartTest,
         startTest,
+        finishTest,
     }
 )(GameTextWindowComponent)
