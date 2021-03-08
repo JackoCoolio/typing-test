@@ -3,7 +3,7 @@
     "productName": "Typing Test",
     "version": "1.0.0",
     "author": "Jackson Wambolt",
-    "license": "MIT",
+    "license": "GPL-3.0",
     "main": "main.js",
     "private": true,
     "browsersList": [
