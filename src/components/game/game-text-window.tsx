@@ -12,6 +12,7 @@ import { GameState } from 'Store/game/types'
 import { calculateWPM, getElapsedTime, isHotkeyPressed } from 'Util/util'
 import { TextWindow, TextWindowState } from '../textwindow/text-window'
 import { generateWords } from './text-generator'
+import './game-text-window.scss'
 
 interface GameTextWindowState extends TextWindowState {
     keys: Map<string, boolean>
@@ -112,12 +113,14 @@ class GameTextWindowComponent extends TextWindow<
             getElapsedTime(this.props.game.timer)
         )
         return (
-            <>
+            <div id="game-text-window">
                 {super.render()}
                 <div id="live-stats">
-                    {wpm.toFixed(0)}wpm : {this.state.elapsedTime.toFixed(0)}s
+                    <span id="live-wpm">{wpm.toFixed(0)}wpm</span>
+                    <span id="stats-divider">:</span>
+                    <span id="live-elapsed-time">{this.state.elapsedTime.toFixed(1)}s</span>
                 </div>
-            </>
+            </div>
         )
     }
 }

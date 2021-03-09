@@ -1,0 +1,29 @@
+#game-text-window {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#live-stats {
+    position: absolute;
+    bottom: 0;
+    height: 50%;
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 48% 24px 48%;
+
+    font-size: 24px;
+}
+
+#live-wpm {
+    text-align: right;
+}
+
+#stats-divider {
+    text-align: center;
+}
+
+#live-elapsed-time {
+    text-align: left;
+}
