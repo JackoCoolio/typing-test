@@ -17,6 +17,7 @@ import './game-text-window.scss'
 interface GameTextWindowState extends TextWindowState {
     keys: Map<string, boolean>
     elapsedTime: number
+    wpm: number
 }
 
 interface GameTextWindowProps {
@@ -41,6 +42,7 @@ class GameTextWindowComponent extends TextWindow<
             targetString: generateWords(10).join(' '),
             keys: new Map<string, boolean>(),
             elapsedTime: 0,
+            wpm: 0,
         }
     }
 
@@ -60,6 +62,10 @@ class GameTextWindowComponent extends TextWindow<
             if (this.props.game.inProgress)
                 this.setState({
                     elapsedTime: getElapsedTime(this.props.game.timer),
+                    wpm: calculateWPM(
+                        this.props.game.userInput.length,
+                        getElapsedTime(this.props.game.timer)
+                    ),
                 })
         }, 100)
 
@@ -108,17 +114,15 @@ class GameTextWindowComponent extends TextWindow<
     }
 
     render() {
-        const wpm = calculateWPM(
-            this.props.game.userInput.length,
-            getElapsedTime(this.props.game.timer)
-        )
         return (
             <div id="game-text-window">
                 {super.render()}
                 <div id="live-stats">
-                    <span id="live-wpm">{wpm.toFixed(0)}wpm</span>
+                    <span id="live-wpm">{this.state.wpm.toFixed(0)}wpm</span>
                     <span id="stats-divider">:</span>
-                    <span id="live-elapsed-time">{this.state.elapsedTime.toFixed(1)}s</span>
+                    <span id="live-elapsed-time">
+                        {this.state.elapsedTime.toFixed(1)}s
+                    </span>
                 </div>
             </div>
         )

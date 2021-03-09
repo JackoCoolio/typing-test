@@ -28,6 +28,7 @@ export function gameReducer(
         case RESTART_TEST:
             return {
                 ...state,
+                inProgress: false,
                 userInput: '',
             }
         case START_TEST:
