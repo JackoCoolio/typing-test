@@ -9,9 +9,8 @@ import {
     finishTest,
 } from 'Store/game/actions'
 import { GameState } from 'Store/game/types'
-import { calculateWPM, getElapsedTime, isHotkeyPressed } from 'Util/util'
+import { calculateWPM, getElapsedTime, isHotkeyPressed, generateTargetString } from 'Util/util'
 import { TextWindow, TextWindowState } from '../textwindow/text-window'
-import { generateWords } from './text-generator'
 import './game-text-window.scss'
 
 interface GameTextWindowState extends TextWindowState {
@@ -39,7 +38,7 @@ class GameTextWindowComponent extends TextWindow<
 
         this.state = {
             ...this.state,
-            targetString: generateWords(10).join(' '),
+            targetString: generateTargetString(this.props.game.mode, this.props.game.settings),
             keys: new Map<string, boolean>(),
             elapsedTime: 0,
             wpm: 0,
@@ -49,7 +48,7 @@ class GameTextWindowComponent extends TextWindow<
     restart() {
         this.setState({
             userInput: '',
-            targetString: generateWords(10).join(' '),
+            targetString: generateTargetString(this.props.game.mode, this.props.game.settings),
         })
 
         this.props.restartTest()

@@ -1,5 +1,8 @@
 type Action = string
 
+import { GameSettings, Mode } from 'Store/game/types'
+import { generateWords, generateQuote } from './text-generator'
+
 export function applyTextAction(text: string, action: Action): string {
     if (!action) return text
     if (action.length > 1) {
@@ -40,4 +43,15 @@ export function calculateWPM(chars: number, seconds: number): number {
 export function getElapsedTime(timer: [number, number]): number {
     const elapsed = process.hrtime(timer)
     return elapsed[0] + elapsed[1] / 1000000000
+}
+
+export function generateTargetString(
+    mode: Mode,
+    settings: GameSettings
+): string {
+    if (mode === 'words') {
+        return generateWords(settings.words.numWords)
+    } else if (mode === 'quote') {
+        return generateQuote(settings.quote.length)
+    }
 }
