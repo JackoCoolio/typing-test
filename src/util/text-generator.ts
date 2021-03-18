@@ -1,7 +1,7 @@
 import commonWords from 'Assets/words.txt'
 import { QuoteLength } from 'Store/game/types'
 
-const words: string[] = commonWords.split('\n')
+const words: string[] = commonWords.split('\n').map(word => word.trim())
 
 export function generateWords(num: number): string {
     if (num <= 0) {
